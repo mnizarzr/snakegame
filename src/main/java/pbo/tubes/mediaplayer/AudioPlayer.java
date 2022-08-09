@@ -1,9 +1,15 @@
 package pbo.tubes.mediaplayer;
 
+import javafx.scene.media.AudioClip;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
@@ -19,12 +25,14 @@ public abstract class AudioPlayer {
     protected long    length;
     protected boolean isPlaying;
 
+
+
     {
         basePath = "./media";
         fileName = "";
     }
 
-    public void play(String fileName) throws IOException, JavaLayerException {
+    public void play(String fileName) throws IOException, JavaLayerException, UnsupportedAudioFileException, LineUnavailableException {
         buffer = new BufferedInputStream(new FileInputStream(fileName));
         player = new Player(buffer);
         setPlaying(true);

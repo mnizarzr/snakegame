@@ -3,6 +3,8 @@ package pbo.tubes.mediaplayer;
 
 import javazoom.jl.decoder.JavaLayerException;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 
 public class SfxPlayer extends AudioPlayer {
@@ -19,8 +21,10 @@ public class SfxPlayer extends AudioPlayer {
         new Thread(() -> {
             try {
                 super.play(basePath + sfx.getFileName());
-            } catch (IOException | JavaLayerException e) {
+            } catch (IOException | JavaLayerException | UnsupportedAudioFileException e) {
                 e.printStackTrace();
+            } catch (LineUnavailableException e) {
+                throw new RuntimeException(e);
             }
         }).start();
     }

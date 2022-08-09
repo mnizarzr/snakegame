@@ -27,7 +27,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
     private final int[] x = new int[GAME_UNITS];
     private final int[] y = new int[GAME_UNITS];
-    
+
     private final ArrayList<Integer> bombXs = new ArrayList<>(GAME_UNITS);
     private final ArrayList<Integer> bombYs = new ArrayList<>(GAME_UNITS);
 
@@ -56,6 +56,7 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     private void startGame() {
+        Snake.musicPlayer.play("music.wav");
         try {
             foodImage = ImageIO.read(new File("media/images/apple.png").toURI().toURL());
             bombImage = ImageIO.read(new File("media/images/bomb.png").toURI().toURL());
@@ -179,6 +180,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
         if (!running) {
             Snake.sfxPlayer.play(SFX.Collided);
+            Snake.musicPlayer.stop();
             timer.stop();
         }
     }
